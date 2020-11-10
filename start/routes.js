@@ -11,6 +11,7 @@ Route.get('/', () => {
 
 Route.post('/user', 'UserController.create');
 Route.post('/login', 'UserController.login');
+Route.get('/user/:id', 'UserController.show');
 
 Route.resource('tarefa', 'TarefaController').apiOnly().middleware('auth');
 

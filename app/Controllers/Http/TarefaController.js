@@ -66,7 +66,7 @@ class TarefaController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async show ({ params, request, response, view, auth }) {
+  async show ({ params, request, response, view, auth }) { 
     const tarefa = Tarefa.query()
                          //.select('titulo', 'descricao')
                          .where('user_id', auth.user.id)

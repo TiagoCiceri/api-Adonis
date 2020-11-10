@@ -7,10 +7,9 @@ class UserController {
 
     async login ({ request, response, auth }) {
         try {
-            
             const { email, password } = request.all();
-            console.log('Email: '+email+'   senha:'+password);
-            const validaToken = await auth.attempt(email, password);
+            
+            const validaToken = await auth.attempt(email, password);          
 
             return validaToken;
 
@@ -46,6 +45,20 @@ class UserController {
         }catch(err) {
             return response.status(500).send({error: `Erro: ${err.message}`});
         }        
+    }
+
+    async show({ params, request, response, view}) {
+        
+        const user = await User.query()
+            .select('username', 'email')
+            .where('id', '=', params.id)
+            .first();
+
+        if (!user) {
+            return response.status(401).send({message: 'Usuário não localizado.'})
+        }
+
+        return user;
     }
 }
 
